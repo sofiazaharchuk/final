@@ -1,11 +1,3 @@
-// ==================== УТИЛІТИ ====================
-
-/**
- * debounce - обмежує частоту виклику функції
- * @param {Function} func - Функція для обмеження
- * @param {number} wait - Затримка в мілісекундах
- * @returns {Function} Декорована функція
- */
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -18,12 +10,6 @@ function debounce(func, wait) {
     };
 }
 
-/**
- * throttle - обмежує виклик функції до одного разу за вказаний період
- * @param {Function} func - Функція для обмеження
- * @param {number} limit - Ліміт в мілісекундах
- * @returns {Function} Декорована функція
- */
 function throttle(func, limit) {
     let inThrottle;
     return function(...args) {
@@ -34,12 +20,6 @@ function throttle(func, limit) {
         }
     };
 }
-
-// ==================== КЛАСИ КЕРУВАННЯ НАВІГАЦІЄЮ ====================
-
-/**
- * NavigationManager - керує мобільним меню та навігацією
- */
 class NavigationManager {
     constructor() {
         this.burger = document.querySelector('.burger');
@@ -90,11 +70,6 @@ class NavigationManager {
     }
 }
 
-// ==================== КЛАСИ АНІМАЦІЙ ====================
-
-/**
- * ScrollAnimations - керує анімаціями при скролі
- */
 class ScrollAnimations {
     constructor() {
         this.observerOptions = {
@@ -122,9 +97,6 @@ class ScrollAnimations {
     }
 }
 
-/**
- * AnimationManager - керує складними анімаціями
- */
 class AnimationManager {
     constructor() {
         this.observerOptions = {
@@ -198,9 +170,6 @@ class AnimationManager {
     }
 }
 
-/**
- * TypewriterEffect - ефект друкування тексту
- */
 class TypewriterEffect {
     constructor() {
         this.init();
@@ -227,11 +196,6 @@ class TypewriterEffect {
     }
 }
 
-// ==================== КЛАСИ ФОРМ ====================
-
-/**
- * FeedbackForm - керує формою зворотного зв'язку
- */
 class FeedbackForm {
     constructor() {
         this.form = document.getElementById('feedbackForm');
@@ -274,9 +238,6 @@ class FeedbackForm {
     }
 }
 
-/**
- * RegistrationModal - керує модальним вікном реєстрації
- */
 class RegistrationModal {
     constructor() {
         this.isModalOpen = false;
@@ -426,12 +387,6 @@ class RegistrationModal {
         }
     }
 }
-
-// ==================== КЛАСИ ГАЛЕРЕЇ ====================
-
-/**
- * Gallery - керує інтерактивною галереєю
- */
 class Gallery {
     constructor() {
         this.currentImageIndex = 0;
@@ -621,12 +576,6 @@ class Gallery {
         return index >= 0 && index < this.galleryData.length;
     }
 }
-
-// ==================== КЛАСИ ВІКТОРИНИ ====================
-
-/**
- * QuizManager - керує інтерактивною вікториною
- */
 class QuizManager {
     constructor() {
         this.currentQuestion = 0;
@@ -1279,12 +1228,6 @@ class QuizManager {
         }
     }
 }
-
-// ==================== КЛАСИ ЕФЕКТІВ ====================
-
-/**
- * TooltipManager - керує підказками
- */
 class TooltipManager {
     constructor() {
         this.murName = document.getElementById('murName');
@@ -1349,10 +1292,6 @@ class TooltipManager {
         }
     }
 }
-
-/**
- * ParallaxEffect - ефект паралаксу
- */
 class ParallaxEffect {
     constructor() {
         this.init();
@@ -1375,9 +1314,6 @@ class ParallaxEffect {
     }
 }
 
-/**
- * ParallaxManager - альтернативний менеджер паралаксу
- */
 class ParallaxManager {
     constructor() {
         this.animationFrameId = null;
@@ -1420,11 +1356,6 @@ class ParallaxManager {
     }
 }
 
-// ==================== ЧАСТИНКОВА СИСТЕМА ====================
-
-/**
- * ParticleSystem - система частинок для фону
- */
 class ParticleSystem {
     constructor() {
         this.canvas = null;
@@ -1523,10 +1454,6 @@ class Particle {
         ctx.globalAlpha = 1.0;
     }
 }
-
-/**
- * ScrollEffects - додаткові ефекти прокрутки
- */
 class ScrollEffects {
     constructor() {
         this.lastScrollY = window.scrollY;
@@ -1558,14 +1485,9 @@ class ScrollEffects {
     }
 }
 
-// ==================== ГЛОБАЛЬНІ ІНСТАНСИ ====================
-
 let galleryInstance;
 let quizInstance;
 
-/**
- * Глобальні функції для HTML-атрибутів onclick
- */
 window.openModal = function(index) {
     if (galleryInstance) galleryInstance.openModal(index);
 };
@@ -1605,35 +1527,21 @@ window.backToResults = function() {
 window.restartQuiz = function() {
     if (quizInstance) quizInstance.restartQuiz();
 };
-
-// ==================== ІНІЦІАЛІЗАЦІЯ ====================
-
-/**
- * Головна функція ініціалізації після завантаження DOM
- */
 function initializeApp() {
-    // Базові менеджери
     new NavigationManager();
     new ScrollAnimations();
     new AnimationManager();
-    
-    // Форми
     new FeedbackForm();
     new RegistrationModal();
-    
-    // Інтерактивні компоненти
     galleryInstance = new Gallery();
     quizInstance = new QuizManager();
-    
-    // Ефекти
     new ParallaxEffect();
     new ParallaxManager();
     new TypewriterEffect();
     new ParticleSystem();
     new ScrollEffects();
     new TooltipManager();
-
-    // Початкові анімації
+    
     setTimeout(() => {
         document.querySelectorAll('.fade-in').forEach(el => {
             el.classList.add('visible');
@@ -1652,7 +1560,6 @@ function initializeApp() {
         });
     }, 700);
 
-    // Плавна прокрутка для якірних посилань
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -1664,8 +1571,6 @@ function initializeApp() {
             }
         });
     });
-
-    // Ефекти для карток
     document.querySelectorAll('.contact-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-15px) scale(1.03)';
@@ -1692,18 +1597,12 @@ function initializeApp() {
         });
     });
 }
-
-// Слухач завантаження DOM
 document.addEventListener('DOMContentLoaded', initializeApp);
 
-// Очищення ресурсів при вивантаженні сторінки
 window.addEventListener('beforeunload', () => {
-    // Очищення анімаційних фреймів
     if (galleryInstance && galleryInstance.animationFrameId) {
         cancelAnimationFrame(galleryInstance.animationFrameId);
     }
-    
-    // Видалення canvas частинок
     const canvas = document.querySelector('canvas');
     if (canvas && canvas.parentNode) {
         canvas.parentNode.removeChild(canvas);
